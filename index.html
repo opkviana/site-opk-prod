@@ -1463,34 +1463,82 @@
       }
 
       /* tabela cabe na tela, sem rolagem lateral e sem colunas colando */
-      table {
+      /* 4 colunas nao cabem num celular: cada linha vira um cartao */
+      .tablewrap {
+        overflow: visible;
+      }
+
+      table,
+      tbody,
+      tbody tr,
+      tbody td {
+        display: block;
+        width: auto;
         min-width: 0;
       }
 
       caption {
-        padding: 20px 0 10px;
+        display: block;
+        padding: 20px 0 12px;
       }
 
-      thead th {
-        font-size: 9px;
-        letter-spacing: .04em;
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        border: 1px solid var(--line);
+        background: var(--card);
+        padding: 15px 16px;
+        margin-bottom: 12px;
+      }
+
+      tbody tr:last-child {
+        margin-bottom: 0;
       }
 
       tbody td {
-        font-size: 13.5px;
-        padding: 11px 0;
-      }
-
-      tbody td+td {
-        padding-left: 10px;
+        border: 0;
+        padding: 0;
+        text-align: left;
+        white-space: normal;
       }
 
       tbody td:first-child {
-        padding-right: 8px;
+        font-size: 15.5px;
+        font-weight: 600;
+        padding: 0 0 11px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid var(--line2);
       }
 
       tbody td:first-child small {
-        font-size: 11.5px;
+        font-size: 12.5px;
+        font-weight: 400;
+        margin-top: 3px;
+      }
+
+      /* valor de um lado, rotulo da coluna do outro */
+      tbody td+td {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 7px 0;
+        font-size: 15px;
+        color: var(--gold);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      tbody td+td::before {
+        content: attr(data-col);
+        font-family: var(--body);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
       .tier {
@@ -1557,12 +1605,12 @@
         letter-spacing: .1em;
       }
 
-      tbody td {
-        font-size: 13px;
+      tbody tr {
+        padding: 14px 14px;
       }
 
-      thead th {
-        font-size: 8.5px;
+      tbody td:first-child {
+        font-size: 15px;
       }
     }
 
@@ -1869,21 +1917,21 @@
           <tbody>
             <tr>
               <td>Sem captação<small>Você envia a voz já gravada</small></td>
-              <td>R$ 550</td>
-              <td>R$ 470</td>
-              <td>R$ 400</td>
+              <td data-col="1 música">R$ 550</td>
+              <td data-col="2 a 4">R$ 470</td>
+              <td data-col="5 a 12">R$ 400</td>
             </tr>
             <tr>
               <td>Só mixagem e masterização<small>A partir do seu material gravado</small></td>
-              <td>R$ 450</td>
-              <td>R$ 380</td>
-              <td>R$ 320</td>
+              <td data-col="1 música">R$ 450</td>
+              <td data-col="2 a 4">R$ 380</td>
+              <td data-col="5 a 12">R$ 320</td>
             </tr>
             <tr>
               <td>Só o beat<small>Instrumental mixado e masterizado</small></td>
-              <td>R$ 400</td>
-              <td>R$ 340</td>
-              <td>R$ 290</td>
+              <td data-col="1 música">R$ 400</td>
+              <td data-col="2 a 4">R$ 340</td>
+              <td data-col="5 a 12">R$ 290</td>
             </tr>
           </tbody>
         </table>
